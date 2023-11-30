@@ -153,10 +153,7 @@ public class DBConnector  {
             stmt.setString(3, user.getPassword());
             stmt.setInt(4, user.getAge());
 
-
             stmt.executeUpdate();
-
-
 
 
             //STEP 5: Clean-up environment
