@@ -1,5 +1,3 @@
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -134,6 +132,7 @@ public class DBConnector  {
 
         Connection conn = null;
         PreparedStatement stmt = null;
+
         try{
             //STEP 1: Register JDBC driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -145,11 +144,19 @@ public class DBConnector  {
             //STEP 3: Execute a query
             System.out.println("Creating statement...");
 
-            String sql = "INSERT INTO userdata (userID, username, password, age) VALUES ('getUserID()','user.getUsername()', 'user.getPassword()', ' user.getAge()')";
+            String sql = "INSERT INTO my_streaming.userdata (userID, username, password, age) VALUES (?, ?, ?, ?)";
             stmt = conn.prepareStatement(sql);
 
 
-            ResultSet rs = stmt.executeQuery();
+            stmt.setInt(1, user.getUserID());
+            stmt.setString(2, user.getUsername());
+            stmt.setString(3, user.getPassword());
+            stmt.setInt(4, user.getAge());
+
+
+            stmt.executeQuery();
+
+
 
 
             //STEP 5: Clean-up environment

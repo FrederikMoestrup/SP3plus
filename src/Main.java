@@ -1,7 +1,13 @@
 public class Main {
     public static void main(String[] args){
 
-        StreamingService stream = new StreamingService();
-        stream.startMenu();
+        DBConnector db = new DBConnector();
+
+        User user = new User(2,"fred","123",false, 25);
+
+        db.writeUserData(user);
+
+       // StreamingService stream = new StreamingService();
+        //stream.startMenu();
     }
 }
