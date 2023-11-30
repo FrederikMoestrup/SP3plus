@@ -5,14 +5,17 @@ public class User {
     private Boolean administrator;
     private String username;
     private String password;
+
+    private int userID;
     private ArrayList<Media> toWatchList = new ArrayList<>();
     private  ArrayList<Media> watchedList = new ArrayList<>();
 
-    User(String username, String password, boolean administrator,int age){
+    User(int userID, String username, String password, boolean administrator,int age){
         this.age = age;
         this.username = username;
         this.password = password;
         this.administrator = administrator;
+        this.userID = userID;
 
     }
 
@@ -54,4 +57,7 @@ public class User {
         return age;
     }
 
+    public int getUserID() {
+        return userID;
+    }
 }

@@ -16,6 +16,7 @@ public class StreamingService {
 
     private TextUI ui = new TextUI();
     private FileIO io = new FileIO();
+    private  DBConnector dbc = new DBConnector();
     private MediaLibrary library = new MediaLibrary();
 
     public void startMenu(){
@@ -279,12 +280,12 @@ public class StreamingService {
         ui.displayMessage("Please enter a password.");
         String passwordInput = ui.scan.nextLine();
        int age = ui.getUserAge("Please enter your age");
-        User user = new User(userInput, passwordInput, false,age);
+        User user = new User(users.size(),userInput, passwordInput, false,age);
 
         users.add(user);
         ui.displayMessage("Thank you for signing up , " + userInput + ".");
 
-        io.writeUserData("src/userdata.txt", users);
+        dbc.writeUserData(user);
 
         startMenu();
 

@@ -4,9 +4,3 @@ Jones,95958686,40
 fred1,gg,10
 jonas,jonas,1
 1,1,18
-2,2,2
-3,3,3
-fred,fred,24
-jonas,jonas,10
-jan,jan123,60
-christian,123,21

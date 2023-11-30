@@ -117,7 +117,7 @@ public class FileIO implements FileEditor{
                 String password = usersAndPasswordsAndAge[1];
                 String age = usersAndPasswordsAndAge[2];
                 int number = Integer.parseInt(age);
-                User user = new User(username, password, false,number);
+                User user = new User(1, username, password, false,number);
                 users.add(user);
             }
         }
