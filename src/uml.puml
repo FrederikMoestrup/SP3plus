@@ -1,0 +1,124 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!pragma layout smetana
+
+class Main
+class StreamingService
+class User
+interface Media
+abstract AMedia
+class Movie
+class Series
+class MediaLibrary
+class TextUI
+class FileIO
+interface FileEditor
+
+
+
+AMedia  <|--  Movie
+AMedia  <|--  Series
+Media <|.- AMedia
+FileEditor <|.- FileIO
+
+
+StreamingService o--  User
+StreamingService *-- MediaLibrary
+StreamingService *-- TextUI
+MediaLibrary *-- Media
+MediaLibrary o-- FileEditor
+StreamingService o-- FileEditor
+User *-- MediaLibrary
+
+Main *-- StreamingService
+
+interface Media {
++void play()
+
+}
+
+abstract AMedia {
+-String titel
+-String genre
+-String releaseYear
+-float rating
++void play()
+}
+
+class Movie{
++void play()
++@override String toString()
+}
+
+class Series{
+-int seasonAmount
+-HashMap <Integer, Integer> seasonEpisodeAmount
++void play()
++@override String toString()
+}
+
+
+class User{
+-Boolean administrator
+-String username
+-String password
+-ArrayList<Media> toWatchList
+-ArrayList<Media> watchedList
+
++void addToWatchList(Media media)
++ArrayList<Media> getToWatchList()
++ArrayList<Media> getWatchedList()
++void addMedia()
+}
+
+class TextUI{
+-Scanner scan
+
++void displayMessage(String msg)
++String getInput(String msg)
+
+}
+
+class StreamingService{
+-ArrayList<User> users
+-TextUI ui
+
++void startMenu()
++void mainMenu()
++void searchMedia()
+-void signUp()
+-void logIn()
+
+
+}
+
+class FileIO{
+Scanner scan
++ArrayList<Media> readMediaData(String path)
+}
+
+class MediaLibrary{
+-FileIO io
+-ArrayList<String> mediaGenres
+-ArrayList<Media> allMedia
+-ArrayList<Media> allMovies
+-ArrayList<Media> allSeries
++ArrayList<Media> getGenreList(ArrayList<Media> mediaList, String genre)
+
+}
+
+class Main{
++static void main(String[] args)
+
+}
+
+interface FileEditor{
++ArrayList<Media> readMediaData(String path)
++void writeUserData()
+}
+
+
+
+
+
+@enduml
