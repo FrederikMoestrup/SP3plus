@@ -154,7 +154,7 @@ public class DBConnector  {
             stmt.setInt(4, user.getAge());
 
 
-            stmt.executeQuery();
+            stmt.executeUpdate();
 
 
 
