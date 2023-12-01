@@ -16,7 +16,7 @@ public class StreamingService {
 
     private TextUI ui = new TextUI();
     private FileIO io = new FileIO();
-    private  DBConnector dbc = new DBConnector();
+    private  DBConnector db = new DBConnector();
     private MediaLibrary library = new MediaLibrary();
 
     public void startMenu(){
@@ -28,7 +28,7 @@ public class StreamingService {
                 "2. Create a new user" + "\n" +
                 "\n" + "0. Exit" + "\n");
         initializeLibrary();
-        users = io.readUserData("src/userdata.txt");
+        users = db.readUserData();
         io.loadUserLists("src/userlists.txt", users, media);
         String input = ui.getInput();
        switch(input){
@@ -285,7 +285,7 @@ public class StreamingService {
         users.add(user);
         ui.displayMessage("Thank you for signing up , " + userInput + ".");
 
-        dbc.writeUserData(user);
+        db.writeUserData(user);
 
         startMenu();
 

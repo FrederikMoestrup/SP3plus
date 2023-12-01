@@ -1,2 +1,6 @@
 1 toWatch; Planet Earth; 
 1 watched; Network; 
+fre toWatch; 
+fre watched; 
+fred toWatch; 
+fred watched; 
