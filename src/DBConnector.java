@@ -253,9 +253,150 @@ public class DBConnector  {
             }//end finally try
         }//end try
 
+    }
+
+
+
+    public void loadUserLists(ArrayList<User> users, ArrayList<Media> allMedia) {
+
+        Boolean mediaFound;
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try{
+            //STEP 1: Register JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            //STEP 2: Open a connection
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+            //STEP 3: Execute a query
+            System.out.println("Creating statement...");
+
+
+            String sql = "SELECT userID, toWatch, watched FROM my_streaming.userlists";
+            stmt = conn.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery(sql);
+
+            //STEP 4: Extract data from result set
+            while(rs.next()){
+                //Retrieve by column name
+
+                int userID = rs.getInt("userID");
+                String toWatch = rs.getString("toWatch");
+                String watched = rs.getString("watched");
+
+
+                    mediaFound=false;
+                    for(Media m : allMedia) {
+                        if (toWatch.equals(m.getTitel())){
+                            mediaFound = true;
+                            (users.get(userID-1)).addToWatchList(m);
+                        }
+                    }
+                    if (!mediaFound){
+                        System.out.println("Media not found :(");
+                    }
+
+                    mediaFound=false;
+                    for(Media m : allMedia) {
+                        if (watched.equals(m.getTitel())){
+                            mediaFound = true;
+                            (users.get(userID-1)).addWatchedList(m);
+                        }
+                    }
+                    if (!mediaFound){
+                        System.out.println("Media not found :(");
+                    }
+
+
+
+            }
+            //STEP 5: Clean-up environment
+            rs.close();
+            stmt.close();
+            conn.close();
+        }catch(SQLException se){
+            //Handle errors for JDBC
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                    stmt.close();
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }//end finally try
+        }//end try
+
+    }
+
+    public void saveUserLists(ArrayList<User> users) {
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        try{
+            //STEP 1: Register JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            //STEP 2: Open a connection
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+            //STEP 3: Execute a query
+            System.out.println("Creating statement...");
+
+            String sql = "INSERT INTO my_streaming.userdata (userID, username, password, age) VALUES (?, ?, ?, ?)";
+            stmt = conn.prepareStatement(sql);
+
+
+            stmt.setInt(1, user.getUserID());
+            stmt.setString(2, user.getUsername());
+            stmt.setString(3, user.getPassword());
+            stmt.setInt(4, user.getAge());
+
+            stmt.executeUpdate();
+
+
+            //STEP 5: Clean-up environment
+            stmt.close();
+            conn.close();
+        }catch(SQLException se){
+            //Handle errors for JDBC
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                    stmt.close();
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }//end finally try
+        }//end try
+
 
 
     }
+
 
 
 
