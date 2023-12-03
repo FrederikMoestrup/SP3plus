@@ -288,10 +288,14 @@ public class DBConnector  {
                 String toWatch = rs.getString("toWatch");
                 String watched = rs.getString("watched");
 
+                String [] arrToWatch = toWatch.split("; ");
+                String [] arrWatched = toWatch.split("; ");
+
+                for (String str: arrToWatch) {
 
                     mediaFound=false;
                     for(Media m : allMedia) {
-                        if (toWatch.equals(m.getTitel())){
+                        if (str.equals(m.getTitel())){
                             mediaFound = true;
                             (users.get(userID-1)).addToWatchList(m);
                         }
@@ -299,17 +303,21 @@ public class DBConnector  {
                     if (!mediaFound){
                         System.out.println("Media not found :(");
                     }
+                }
 
-                    mediaFound=false;
-                    for(Media m : allMedia) {
-                        if (watched.equals(m.getTitel())){
+                for (String str: arrWatched) {
+
+                    mediaFound = false;
+                    for (Media m : allMedia) {
+                        if (watched.equals(m.getTitel())) {
                             mediaFound = true;
-                            (users.get(userID-1)).addWatchedList(m);
+                            (users.get(userID - 1)).addWatchedList(m);
                         }
                     }
-                    if (!mediaFound){
+                    if (!mediaFound) {
                         System.out.println("Media not found :(");
                     }
+                }
 
 
 
@@ -357,17 +365,33 @@ public class DBConnector  {
             //STEP 3: Execute a query
             System.out.println("Creating statement...");
 
-            String sql = "INSERT INTO my_streaming.userdata (userID, username, password, age) VALUES (?, ?, ?, ?)";
+            //Empty table
+            String sql = "TRUNCATE TABLE my_streaming.userlists";
             stmt = conn.prepareStatement(sql);
-
-
-            stmt.setInt(1, user.getUserID());
-            stmt.setString(2, user.getUsername());
-            stmt.setString(3, user.getPassword());
-            stmt.setInt(4, user.getAge());
-
             stmt.executeUpdate();
 
+
+            for(User u: users) {
+                String userToWatchList = "";
+                String userWatchedList = "";
+                for (Media m : u.getToWatchList()) {
+                    userToWatchList += m.getTitel() + "; ";
+                }
+                for (Media m : u.getWatchedList()) {
+                    userWatchedList += m.getTitel() + "; ";
+                }
+
+
+                String sql2 = "INSERT INTO my_streaming.userlists (userID, toWatch, watched) VALUES (?, ?, ?)";
+                stmt = conn.prepareStatement(sql2);
+
+
+                stmt.setInt(1, u.getUserID());
+                stmt.setString(2, userToWatchList);
+                stmt.setString(3, userWatchedList);
+
+                stmt.executeUpdate();
+            }
 
             //STEP 5: Clean-up environment
             stmt.close();

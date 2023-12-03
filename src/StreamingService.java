@@ -15,7 +15,6 @@ public class StreamingService {
 
 
     private TextUI ui = new TextUI();
-    private FileIO io = new FileIO();
     private  DBConnector db = new DBConnector();
     private MediaLibrary library = new MediaLibrary();
 
@@ -29,7 +28,7 @@ public class StreamingService {
                 "\n" + "0. Exit" + "\n");
         initializeLibrary();
         users = db.readUserData();
-        io.loadUserLists("src/userlists.txt", users, media);
+        db.loadUserLists(users, media);
         String input = ui.getInput();
        switch(input){
            case "1":
@@ -39,7 +38,7 @@ public class StreamingService {
                signUp();
                break;
            case "0":
-               io.saveUserLists("src/userlists.txt",users);
+               db.saveUserLists(users);
                System.exit(0);
                break;
            default:
@@ -95,12 +94,12 @@ public class StreamingService {
                     break;
 
                 case "9":
-                    io.saveUserLists("src/userlists.txt",users);
+                    db.saveUserLists(users);
                     ui.displayMessage("\n" + "You have been logged out.");
                     startMenu();
                     break;
                 case "0":
-                    io.saveUserLists("src/userlists.txt",users);
+                    db.saveUserLists(users);
                     ui.displayMessage("\n" + "Thank you for using StreamStream.");
                     System.exit(0);
                     break;
@@ -155,12 +154,12 @@ public class StreamingService {
                     mediaChoice(pickMedia(currentList));
                     break;
                 case "9":
-                    io.saveUserLists("src/userlists.txt",users);
+                    db.saveUserLists(users);
                     ui.displayMessage("\n" + "You have been logged out.");
                     startMenu();
                     break;
                 case "0":
-                    io.saveUserLists("src/userlists.txt",users);
+                    db.saveUserLists(users);
                     ui.displayMessage("\n" + "Thank you for using StreamStream.");
                     System.exit(0);
                     break;
