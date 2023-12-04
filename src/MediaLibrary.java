@@ -3,7 +3,7 @@ import java.util.Collections;
 
 public class MediaLibrary {
 
-    FileIO io = new FileIO();
+    DBConnector db = new DBConnector();
 
     ArrayList<String> movieGenres = new ArrayList<>();
     ArrayList<String> seriesGenres = new ArrayList<>();
@@ -101,12 +101,12 @@ public class MediaLibrary {
 
 
     public ArrayList<Media> getAllMovies() {
-        allMovies = io.readMovieData("src/100bedstefilm.txt");
+        allMovies = db.readMovieData();
         return allMovies;
     }
 
     public ArrayList<Media> getAllSeries() {
-        allSeries = io.readSeriesData("src/100bedsteserier.txt");
+        allSeries = db.readSeriesData();
         return allSeries;
     }
 

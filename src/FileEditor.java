@@ -2,8 +2,17 @@ import java.util.ArrayList;
 
 public interface FileEditor {
 
-    public ArrayList<Media> readMovieData(String path);
-    public ArrayList<Media> readSeriesData(String path);
+    public ArrayList<Media> readMovieData();
+    public ArrayList<Media> readSeriesData();
 
-    public void writeUserData(String userPath, ArrayList<User> users);
+    ArrayList<User> readUserData();
+
+    void writeUserData(User user);
+
+    void loadUserLists(ArrayList<User> users, ArrayList<Media> allMedia);
+
+    void saveUserLists(ArrayList<User> users);
+
+
+
 }
