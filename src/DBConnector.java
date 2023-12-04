@@ -24,7 +24,7 @@ public class DBConnector implements FileEditor {
 
             //STEP 3: Execute a query
             System.out.println("Creating statement...");
-            String sql = "SELECT genre, titel, year, rating FROM movie WHERE movieID BETWEEN 1 and 100";
+            String sql = "SELECT genre, titel, releaseYear, rating FROM movie WHERE movieID BETWEEN 1 and 100";
             stmt = conn.prepareStatement(sql);
 
             ResultSet rs = stmt.executeQuery(sql);
@@ -36,7 +36,7 @@ public class DBConnector implements FileEditor {
 
                 String titel = rs.getString("titel");
                 String genre = rs.getString("genre");
-                String year = rs.getString("year");
+                String year = rs.getString("releaseYear");
                 float rating = rs.getFloat("rating");
 
                 ArrayList<String> genreArrList = new ArrayList<>();
