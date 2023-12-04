@@ -45,7 +45,7 @@ public class DBConnector implements FileEditor {
                 for (String g : genreList) {
                     genreArrList.add(g.trim());
                 }
-                Movie movie = new Movie(titel, genreArrList, year, rating);
+                Movie movie = new Movie(titel.trim(), genreArrList, year, rating);
                 data.add(movie);
 
             }
@@ -122,7 +122,7 @@ public class DBConnector implements FileEditor {
                     seasonEpisodeAmount.put(Integer.parseInt(seasonsEpisode[0].trim()),Integer.parseInt(seasonsEpisode[1].trim()));
                     seasonAmount++;
                 }
-                Series series = new Series(titel, genreArrList, releaseYear, rating,seasonAmount,seasonEpisodeAmount);
+                Series series = new Series(titel.trim(), genreArrList, releaseYear, rating,seasonAmount,seasonEpisodeAmount);
                 data.add(series);
 
             }
