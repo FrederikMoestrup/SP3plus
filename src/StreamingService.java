@@ -86,10 +86,12 @@ public class StreamingService {
                     break;
                 case "4":
                     showToWatchlist();
+                    pickFromListOrMainMenu();
                     mediaChoiceInPTW(pickMedia(currentList));
                     break;
                 case "5":
                     showHistory();
+                    pickFromListOrMainMenu();
                     mediaChoice(pickMedia(currentList));
                     break;
 
@@ -147,10 +149,12 @@ public class StreamingService {
                     break;
                 case "4":
                     showToWatchlist();
+                    pickFromListOrMainMenu();
                     mediaChoiceInPTW(pickMedia(currentList));
                     break;
                 case "5":
                     showHistory();
+                    pickFromListOrMainMenu();
                     mediaChoice(pickMedia(currentList));
                     break;
                 case "9":
@@ -164,8 +168,7 @@ public class StreamingService {
                     System.exit(0);
                     break;
                 default:
-                    invalidInput();
-                    kidsMenu();
+                    invalidInputMainMenu();
                     break;
 
             }
@@ -248,7 +251,22 @@ public class StreamingService {
         }
     }
 
+    private void pickFromListOrMainMenu(){
+        ui.displayMessage("1. Pick media from list\n"+
+                "0. Go back to main menu");
+        String input = ui.getInput();
+        switch (input){
+            case"1":
+                break;
+            case"0":
+                mainMenu();
+                break;
+            default:
+                invalidInputMainMenu();
+                break;
+        }
 
+    }
 
     private void showHistory() {
         if(currentUser.getWatchedList().isEmpty()){
@@ -402,7 +420,7 @@ public class StreamingService {
               mainMenu();
               break;
           default:
-             invalidInput();
+              invalidInputMainMenu();
       }
     }
 
@@ -440,7 +458,7 @@ public class StreamingService {
                 mainMenu();
                 break;
             default:
-                invalidInput();
+                invalidInputMainMenu();
                 break;
         }
     }

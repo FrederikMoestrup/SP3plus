@@ -318,7 +318,7 @@ public class DBConnector implements FileEditor {
                             (users.get(userID-1)).addToWatchList(m);
                         }
                     }
-                    if (!mediaFound){
+                    if (!mediaFound && !str.equals("")){
                         System.out.println("Media not found :(");
                     }
                 }
@@ -332,7 +332,7 @@ public class DBConnector implements FileEditor {
                             (users.get(userID - 1)).addWatchedList(m);
                         }
                     }
-                    if (!mediaFound) {
+                    if (!mediaFound && !str.equals("")) {
                         System.out.println("Media not found :(");
                     }
                 }
