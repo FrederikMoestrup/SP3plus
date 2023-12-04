@@ -40,7 +40,7 @@ public class DBConnector implements FileEditor {
                 float rating = rs.getFloat("rating");
 
                 ArrayList<String> genreArrList = new ArrayList<>();
-                String[] genreList = genre.split(", ");
+                String[] genreList = genre.split(". ");
 
                 for (String g : genreList) {
                     genreArrList.add(g.trim());
