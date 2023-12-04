@@ -19,11 +19,11 @@ public class DBConnector implements FileEditor {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             //STEP 2: Open a connection
-            System.out.println("Connecting to database...");
+            //System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             //STEP 3: Execute a query
-            System.out.println("Creating statement...");
+            //System.out.println("Creating statement...");
             String sql = "SELECT genre, titel, releaseYear, rating FROM movie WHERE movieID BETWEEN 1 and 100";
             stmt = conn.prepareStatement(sql);
 
@@ -86,11 +86,11 @@ public class DBConnector implements FileEditor {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             //STEP 2: Open a connection
-            System.out.println("Connecting to database...");
+            //System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             //STEP 3: Execute a query
-            System.out.println("Creating statement...");
+            //System.out.println("Creating statement...");
             String sql = "SELECT genre, titel, releaseYear, rating, seasons FROM series WHERE seriesID BETWEEN 1 and 100";
             stmt = conn.prepareStatement(sql);
 
@@ -167,11 +167,11 @@ public class DBConnector implements FileEditor {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             //STEP 2: Open a connection
-            System.out.println("Connecting to database...");
+            //System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
             //STEP 3: Execute a query
-            System.out.println("Creating statement...");
+            //System.out.println("Creating statement...");
 
 
             String sql = "SELECT userID, username, password, age FROM my_streaming.userdata";
@@ -229,11 +229,11 @@ public class DBConnector implements FileEditor {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             //STEP 2: Open a connection
-            System.out.println("Connecting to database...");
+            //System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
             //STEP 3: Execute a query
-            System.out.println("Creating statement...");
+            //System.out.println("Creating statement...");
 
             String sql = "INSERT INTO my_streaming.userdata (userID, username, password, age) VALUES (?, ?, ?, ?)";
             stmt = conn.prepareStatement(sql);
@@ -286,11 +286,11 @@ public class DBConnector implements FileEditor {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             //STEP 2: Open a connection
-            System.out.println("Connecting to database...");
+            //System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
             //STEP 3: Execute a query
-            System.out.println("Creating statement...");
+            //System.out.println("Creating statement...");
 
 
             String sql = "SELECT userID, toWatch, watched FROM my_streaming.userlists";
@@ -307,7 +307,7 @@ public class DBConnector implements FileEditor {
                 String watched = rs.getString("watched");
 
                 String [] arrToWatch = toWatch.split("; ");
-                String [] arrWatched = toWatch.split("; ");
+                String [] arrWatched = watched.split("; ");
 
                 for (String str: arrToWatch) {
 
@@ -327,7 +327,7 @@ public class DBConnector implements FileEditor {
 
                     mediaFound = false;
                     for (Media m : allMedia) {
-                        if (watched.equals(m.getTitel())) {
+                        if (str.equals(m.getTitel())) {
                             mediaFound = true;
                             (users.get(userID - 1)).addWatchedList(m);
                         }
@@ -377,11 +377,11 @@ public class DBConnector implements FileEditor {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             //STEP 2: Open a connection
-            System.out.println("Connecting to database...");
+            //System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
             //STEP 3: Execute a query
-            System.out.println("Creating statement...");
+            //System.out.println("Creating statement...");
 
             //Empty table
             String sql = "TRUNCATE TABLE my_streaming.userlists";

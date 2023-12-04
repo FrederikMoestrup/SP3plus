@@ -39,7 +39,6 @@ public class StreamingService {
                signUp();
                break;
            case "0":
-               db.saveUserLists(users);
                System.exit(0);
                break;
            default:
